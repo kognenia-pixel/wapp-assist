@@ -1,0 +1,7 @@
+{
+  "name": "wapp-assist-backend",
+  "scripts": {
+    "install": "cd installer-web && npm install",
+    "start": "cd installer-web && npm start"
+  }
+}
