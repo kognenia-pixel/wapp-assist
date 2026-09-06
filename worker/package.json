@@ -1,0 +1,22 @@
+{
+  "name": "wapp-assist-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Wapp Assist — cerveau WhatsApp multi-carnets (Cloudflare Worker). White-label, sans marque en dur.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "test": "node --test --test-concurrency=1",
+    "lint": "node --check src/index.js && node --check src/kb.js && node --check src/clients.js",
+    "build": "echo \"Cloudflare Worker — no build\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20260903.1": true
+  }
+}

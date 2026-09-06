@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wapp Assist — Configuration boutique</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.tab-btn.active { background: #111827; color: #fff; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+input, textarea, select { color: #111827; }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+<div class="max-w-3xl mx-auto p-4 sm:p-6">
+  <header class="mb-6">
+    <h1 class="text-2xl font-bold">Wapp Assist — fiche boutique</h1>
+    <p class="text-sm text-gray-600 mt-1">Remplissez, puis « Envoyer au Worker ». Vos clés restent dans ce navigateur + vos secrets Cloudflare. Rien n'est envoyé ailleurs.</p>
+  </header>
+
+  <div class="flex gap-2 mb-4 flex-wrap">
+    <button class="tab-btn active px-4 py-2 rounded border" data-tab="meta">1. Infos Meta</button>
+    <button class="tab-btn px-4 py-2 rounded border" data-tab="produits">2. Produits &amp; Prix</button>
+    <button class="tab-btn px-4 py-2 rounded border" data-tab="horaires">3. Horaires &amp; FAQ</button>
+  </div>
+
+  <!-- ONGLET 1 -->
+  <section id="tab-meta" class="tab-panel active bg-white rounded shadow p-4 space-y-3">
+    <h2 class="font-semibold">Connexion au Worker + Meta</h2>
+    <label class="block text-sm">URL du Worker (BRAIN_ADMIN_URL)
+      <input id="f-worker-url" class="mt-1 w-full border rounded p-2" placeholder="https://wapp-assist-worker.votre-compte.workers.dev">
+    </label>
+    <label class="block text-sm">Secret admin (ADMIN_SECRET — celui posé via wrangler)
+      <input id="f-admin-secret" type="password" class="mt-1 w-full border rounded p-2" placeholder="••••••••">
+    </label>
+    <label class="block text-sm">phone_number_id Meta (numéro WhatsApp branché à l'API)
+      <input id="f-pnid" class="mt-1 w-full border rounded p-2" placeholder="ex : 123456789012345">
+    </label>
+    <div class="text-xs text-gray-600 bg-gray-50 border rounded p-3">
+      Où trouver ça ? 1) <b>developers.facebook.com</b> → votre app → WhatsApp → API Setup : copiez le <b>Phone Number ID</b>.
+      2) Ajoutez votre propre numéro en destinataire de test (sandbox Meta).
+      3) Le token Meta se met côté Worker via <code>wrangler secret put WHATSAPP_TOKEN</code>, jamais ici.
+      <button id="btn-tester" type="button" class="ml-2 underline">Tester la connexion</button>
+      <span id="test-result" class="ml-2"></span>
+    </div>
+    <label class="block text-sm">Nom du commerce (obligatoire)
+      <input id="f-nom" class="mt-1 w-full border rounded p-2" placeholder="ex : Ma Boutique">
+    </label>
+    <label class="block text-sm">Secteur
+      <input id="f-secteur" class="mt-1 w-full border rounded p-2" placeholder="ex : cosmétiques, restaurant...">
+    </label>
+    <label class="block text-sm">Ton des réponses
+      <input id="f-ton" class="mt-1 w-full border rounded p-2" placeholder="chaleureux et professionnel, vouvoiement">
+    </label>
+  </section>
+
+  <!-- ONGLET 2 -->
+  <section id="tab-produits" class="tab-panel bg-white rounded shadow p-4 space-y-3">
+    <h2 class="font-semibold">Produits &amp; prix</h2>
+    <p class="text-xs text-gray-600">Un produit par ligne : <code>nom | prix | description (optionnel)</code><br>Exemple : <code>Savon réparateur | 100 000 | boutons et dartres</code></p>
+    <textarea id="f-catalogue" rows="7" class="w-full border rounded p-2 text-sm" placeholder="Savon réparateur | 100 000 | boutons et dartres&#10;Gel douche | 200 000 | hydratant"></textarea>
+  </section>
+
+  <!-- ONGLET 3 -->
+  <section id="tab-horaires" class="tab-panel bg-white rounded shadow p-4 space-y-3">
+    <h2 class="font-semibold">Horaires, adresse &amp; FAQ</h2>
+    <label class="block text-sm">Horaires
+      <input id="f-horaires" class="mt-1 w-full border rounded p-2" placeholder="ex : Lun-Sam 9h-19h, commandes 24h/24 sur WhatsApp">
+    </label>
+    <label class="block text-sm">Adresse
+      <input id="f-adresse" class="mt-1 w-full border rounded p-2" placeholder="ex : Dixinn, Conakry">
+    </label>
+    <label class="block text-sm">Contacts (livraison, paiement, infos)
+      <textarea id="f-contacts" rows="3" class="mt-1 w-full border rounded p-2 text-sm" placeholder="LIVRAISON : partout à Conakry... PAIEMENT : Orange Money ou espèces..."></textarea>
+    </label>
+    <label class="block text-sm">FAQ — une par ligne : <code>question || réponse</code>
+      <textarea id="f-faq" rows="4" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Vous livrez ? || Oui, partout à Conakry...&#10;Comment payer ? || Orange Money ou espèces..."></textarea>
+    </label>
+    <label class="block text-sm">Règles (une par ligne, optionnel)
+      <textarea id="f-regles" rows="2" class="mt-1 w-full border rounded p-2 text-sm" placeholder="Ne jamais inventer un prix..."></textarea>
+    </label>
+  </section>
+
+  <div class="mt-4 flex gap-2 flex-wrap">
+    <button id="btn-send" class="px-5 py-2 rounded bg-green-700 text-white font-semibold">Envoyer au Worker</button>
+    <button id="btn-save" class="px-4 py-2 rounded border">Sauvegarder en local</button>
+    <button id="btn-load" class="px-4 py-2 rounded border">Recharger</button>
+  </div>
+  <div id="status" class="mt-3 text-sm p-3 rounded hidden"></div>
+
+  <footer class="mt-6 text-xs text-gray-500">
+    White-label : cette page ne contient aucune marque en dur. Personnalisez le titre/couleurs via vos propres fichiers.
+    Les secrets ne sont jamais affichés après saisie.
+  </footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    $('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+function showStatus(msg, ok) {
+  const el = $('status');
+  el.classList.remove('hidden');
+  el.className = 'mt-3 text-sm p-3 rounded ' + (ok ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900');
+  el.textContent = msg;
+}
+
+function parseCatalogue(text) {
+  return text.split('\n').map(l => l.trim()).filter(Boolean).map(line => {
+    const parts = line.split('|').map(s => s.trim());
+    return { nom: parts[0] || '', prix: parts[1] || '', description: parts[2] || '' };
+  }).filter(p => p.nom && p.prix);
+}
+
+function parseFaq(text) {
+  return text.split('\n').map(l => l.trim()).filter(Boolean).map(line => {
+    const i = line.indexOf('||');
+    if (i < 0) return null;
+    return { question: line.slice(0, i).trim(), reponse: line.slice(i + 2).trim() };
+  }).filter(Boolean);
+}
+
+function buildKb() {
+  return {
+    nom: $('f-nom').value.trim(),
+    secteur: $('f-secteur').value.trim(),
+    ton: $('f-ton').value.trim(),
+    nom_repondant: '',
+    horaires: $('f-horaires').value.trim(),
+    adresse: $('f-adresse').value.trim(),
+    contacts: $('f-contacts').value.trim(),
+    catalogue: parseCatalogue($('f-catalogue').value),
+    faq: parseFaq($('f-faq').value),
+    regles: $('f-regles').value.split('\n').map(s => s.trim()).filter(Boolean),
+    escalation: { nom: '', numero: '' }
+  };
+}
+
+$('btn-tester').addEventListener('click', async () => {
+  const base = $('f-worker-url').value.trim().replace(/\/$/, '');
+  const secret = $('f-admin-secret').value;
+  if (!base || !secret) { $('test-result').textContent = 'Renseignez URL + secret.'; return; }
+  $('test-result').textContent = 'Test...';
+  try {
+    const r = await fetch(base + '/admin/kb', { headers: { 'x-admin-secret': secret } });
+    $('test-result').textContent = r.ok ? 'Connexion OK.' : 'Échec (' + r.status + '). Vérifiez URL/secret.';
+  } catch (e) { $('test-result').textContent = 'Injoignable. Vérifiez l’URL.'; }
+});
+
+$('btn-send').addEventListener('click', async () => {
+  const base = $('f-worker-url').value.trim().replace(/\/$/, '');
+  const secret = $('f-admin-secret').value;
+  const pid = $('f-pnid').value.trim();
+  if (!base || !secret || !pid) { showStatus('Il manque : URL Worker, secret admin ou phone_number_id (onglet 1).', false); return; }
+  const kb = buildKb();
+  if (!kb.nom) { showStatus('Le nom du commerce est obligatoire (onglet 1).', false); return; }
+  try {
+    const r = await fetch(base + '/admin/kb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-secret': secret },
+      body: JSON.stringify({ phone_number_id: pid, kb })
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      const det = data.details ? ' : ' + data.details.join(' ; ') : (data.erreur ? ' : ' + data.erreur : '');
+      showStatus('Erreur (' + r.status + ')' + det, false);
+      return;
+    }
+    showStatus('Fiche envoyée. Testez sur WhatsApp : posez une question sur un prix.', true);
+  } catch (e) { showStatus('Envoi impossible : ' + e.message, false); }
+});
+
+$('btn-save').addEventListener('click', () => {
+  const data = {};
+  ['f-worker-url','f-nom','f-secteur','f-ton','f-catalogue','f-horaires','f-adresse','f-contacts','f-faq','f-regles','f-pnid'].forEach(id => data[id] = $(id).value);
+  localStorage.setItem('wapp-assist-draft', JSON.stringify(data));
+  showStatus('Brouillon sauvegardé dans ce navigateur.', true);
+});
+$('btn-load').addEventListener('click', () => {
+  try {
+    const data = JSON.parse(localStorage.getItem('wapp-assist-draft') || '{}');
+    Object.keys(data).forEach(id => { if ($(id)) $(id).value = data[id]; });
+    showStatus('Brouillon rechargé.', true);
+  } catch (e) { showStatus('Aucun brouillon.', false); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: wapp-installer
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: INSTALLER_SECRET
+        generateValue: true
+      - key: SETUP_SH_URL
+        value: https://raw.githubusercontent.com/ton-compte/wapp-assist/main/setup.sh
+      - key: FRONTEND_ORIGIN
+        value: "*"
+    healthCheckPath: /api/health

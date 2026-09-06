@@ -1,0 +1,24 @@
+name = "wapp-assist-worker"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+[observability]
+enabled = true
+
+# Secrets — à définir via `wrangler secret put` (jamais en dur ici) :
+#   VERIFY_TOKEN   - jeton de vérification du webhook Meta (vous l'inventez)
+#   WHATSAPP_TOKEN - token d'accès Meta Cloud API (généré dans Meta Developer)
+#   GEMINI_API_KEY - clé Google AI Studio (https://aistudio.google.com/apikey)
+#   ADMIN_SECRET   - secret de l'API /admin/kb (vous l'inventez, à recopier dans la page web)
+#
+# Variables white-label (optionnelles, modifiables sans redéployer le code) :
+#   BRAND_NAME            - ex : "Ma Boutique"
+#   BRAND_COLOR           - ex : "#12A66B"
+#   BRAND_WHATSAPP_NUMBER - ex : "+224 6XX XX XX XX" (affiché dans les réponses de repli)
+#   BRAND_LOGO_URL        - ex : "https://..." (utilisé par la page web, pas par le Worker)
+#
+# KV : créé par setup.sh (`wrangler kv namespace create KB`).
+# Renseignez l'id ci-dessous après création :
+ [[kv_namespaces]]
+ binding = "KB"
+ id = "2140aa550dd443e5846295fded6e7f84"

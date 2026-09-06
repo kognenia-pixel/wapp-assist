@@ -1,0 +1,10 @@
+Vous perdez des clients sur WhatsApp.
+
+Chaque heure sans réponse = une commande partie chez le concurrent. Wapp Assist règle ça : un assistant IA qui répond à votre place, 24h/24, avec VOS produits, VOS prix, VOS horaires. Jamais d’invention.
+
+1 000 000 GNF, une fois. Pas d’abonnement. Vous l’installez sur votre serveur (2 min, formulaire web, pas de code), c’est hébergé chez vous sur Cloudflare. À vous pour de bon — pour votre commerce, vos clients, ou à revendre.
+
+Démo en ligne : https://wapp-installer.onrender.com (coche “Mode simulation”) ou WhatsApp démo : +1 (555) 141-8006.
+Pour acheter : https://wapp-assist-vente.pages.dev → “Acheter maintenant” (Orange Money / USDT). Après paiement, vous recevez le ZIP + lien installateur par WhatsApp. Vous installez, vous êtes en ligne.
+
+Usage libre. Produit fini, livré en l’état (guide inclus).

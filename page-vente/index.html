@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wapp Assist — Assistant WhatsApp IA 24h/24</title>
+<meta name="description" content="Ne perdez plus un client sur WhatsApp. Wapp Assist répond à votre place, 24h/24, avec vos prix et horaires. Licence unique 1 000 000 GNF." />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap");
+:root{--brand:#10B27E;--ink:#000;--muted:#555;--line:#e5e5e5}
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:var(--ink);font-family:Inter,system-ui,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 44px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.02em}
+.badge i{width:8px;height:8px;background:var(--brand);border-radius:50%}
+h1{font-family:Poppins,sans-serif;font-size:34px;line-height:1.05;margin:14px 0 8px;letter-spacing:-.03em}
+h1 span{color:var(--brand)}
+.lead{font-size:15px;color:var(--muted);line-height:1.6;max-width:640px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+@media(max-width:740px){.grid3{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+.card h3{margin:0 0 6px;font-size:14px}
+.card p{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--brand);color:#fff;border:none;border-radius:14px;padding:16px 22px;font-size:15px;font-weight:800;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(.93)}
+.btn-ghost{background:#000}
+.muted{font-size:12px;color:var(--muted)}
+.demo{margin-top:16px;background:#0b0b0b;color:#d6ffe9;border-radius:14px;padding:14px;font-family:ui-monospace,monospace;font-size:12px;line-height:1.6}
+.demo a{color:#7CFFB2}
+hr{border:none;border-top:1px solid var(--line);margin:20px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge"><i></i> LICENCE UNIQUE · PAS D’ABONNEMENT</span>
+  <h1>Wapp <span>Assist</span> — ne perdez plus un client sur WhatsApp.</h1>
+  <p class="lead">Vos clients écrivent à toute heure. Wapp Assist répond à votre place, 24h/24, avec <strong>vos produits, vos prix, vos horaires</strong>. Zéro abonnement. Vous installez une fois, c’est à vous.</p>
+
+  <div class="grid3">
+    <div class="card"><h3>⚡ Répond instantanément</h3><p>Prix exacts, horaires, livraison — jamais d’invention. Si l’info manque : “Je vérifie avec l’équipe”.</p></div>
+    <div class="card"><h3>📚 Vos connaissances</h3><p>PDF, TXT, URL → RAG intégré. Plus vous ajoutez de sources, plus il est malin.</p></div>
+    <div class="card"><h3>🔒 100% à vous</h3><p>Hébergé sur <strong>votre</strong> Cloudflare. Vos clés, votre KV, votre numéro. Pas de commission.</p></div>
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <a id="buy" class="btn" href="https://pay.orange-money.com/ton-lien" target="_blank" rel="noreferrer">Acheter maintenant — 1 000 000 GNF</a>
+    <a class="btn btn-ghost" href="https://wapp-installer.onrender.com" target="_blank" rel="noreferrer">J’ai déjà payé → Installer</a>
+  </div>
+  <p class="muted" style="margin-top:8px">Paiement Orange Money ou USDT. Après paiement, vous recevez le ZIP + le lien installateur par WhatsApp/mail. <strong>Usage libre</strong> : votre commerce, vos clients, revente — comme vous voulez.</p>
+
+  <div class="demo">
+    <strong>Démo en ligne (sans payer) :</strong> écrivez “Bonjour, vos horaires ?” au <a href="https://wa.me/15551418006" target="_blank">numéro de démo WhatsApp</a> ou testez l’installateur en <strong>mode simulation</strong> sur <a href="https://wapp-installer.onrender.com" target="_blank">wapp-installer.onrender.com</a> (coche “Mode simulation”).
+    <br />Worker démo : <code>https://wapp-assist-worker.workers.dev/health</code> → <code>{"status":"ok"}</code>
+  </div>
+
+  <hr />
+  <h3 style="margin:0;font-size:15px">Comment ça marche (3 min)</h3>
+  <ol style="font-size:13px;color:var(--muted);line-height:1.7">
+    <li>Payez → recevez le ZIP + lien installateur.</li>
+    <li>Ouvrez l’installateur, collez vos clés (Gemini, Meta, Cloudflare) → <strong>Installer</strong> → logs en direct 1/6…6/6.</li>
+    <li>Ajoutez vos produits dans l’interface → testez sur WhatsApp. C’est en ligne.</li>
+  </ol>
+
+  <div class="card" style="margin-top:16px;background:#f9f9f9">
+    <h3 style="font-size:13px">Produit fini — pas de support</h3>
+    <p>Vendu en l’état, avec guide. Vous êtes autonome. Aucune donnée chez nous, aucun abonnement. Mises à jour non incluses (ZIP livré tel quel).</p>
+  </div>
+
+  <p class="muted" style="margin-top:14px">Questions ? Écrivez “WAPP” sur WhatsApp : <a href="https://wa.me/224623994113">+224 623 99 41 13</a></p>
+</div>
+<script>
+// Remplace le lien d'achat par ton lien réel Orange Money / USDT
+const PAY_LINK = localStorage.getItem("wapp-pay-link") || "";
+if (PAY_LINK) document.getElementById("buy").href = PAY_LINK;
+</script>
+</body>
+</html>

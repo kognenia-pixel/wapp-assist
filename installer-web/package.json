@@ -1,0 +1,22 @@
+{
+  "name": "wapp-assist-installer",
+  "version": "1.0.0",
+  "description": "Installateur web graphique pour Wapp Assist — SSH + SSE, sans terminal",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["wapp-assist", "installer", "ssh", "cloudflare"],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "ssh2": "^1.16.0"
+  }
+}
