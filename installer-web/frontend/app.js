@@ -256,19 +256,6 @@ btnMetaReset.addEventListener("click", async (e) => {
   setInterval(refreshMetaStatus, 3000);
 })();
 
-// ---------- VIDEO POSTER ----------
-const demoVideo = $("#demo-video");
-const videoPoster = $("#video-poster");
-if (demoVideo && videoPoster) {
-  videoPoster.addEventListener("click", () => {
-    demoVideo.play().catch(() => {});
-    videoPoster.style.display = "none";
-  });
-  demoVideo.addEventListener("play", () => { videoPoster.style.display = "none"; });
-  demoVideo.addEventListener("pause", () => { if (demoVideo.currentTime === 0) videoPoster.style.display = "flex"; });
-  demoVideo.addEventListener("ended", () => { videoPoster.style.display = "flex"; });
-}
-
 // ---------- INSTALL ----------
 async function startInstall() {
   const miss = validateAll();

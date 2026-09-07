@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" role="img" aria-labelledby="tvTitle tvDesc">
+<title id="tvTitle">Flux de vente Wapp Assist en 4 etapes</title>
+<desc id="tvDesc">Voir la page de vente, payer 1 000 000 GNF via Orange Money, recevoir le code de licence, installer via l installateur web.</desc>
+<style>
+  .bg{fill:#ffffff}
+  .card{fill:#ffffff;stroke:#e8e8e8;stroke-width:2}
+  .num{fill:#10B27E}
+  .numTxt{fill:#ffffff;font-family:Inter,Poppins,Arial,sans-serif;font-size:22px;font-weight:700}
+  .stepTitle{fill:#0b0b0b;font-family:Inter,Poppins,Arial,sans-serif;font-size:20px;font-weight:700}
+  .stepTxt{fill:#6b6b6b;font-family:Inter,Arial,sans-serif;font-size:15px}
+  .head{fill:#0b0b0b;font-family:Poppins,Inter,Arial,sans-serif;font-size:26px;font-weight:700}
+  .sub{fill:#6b6b6b;font-family:Inter,Arial,sans-serif;font-size:15px}
+  .arrow{stroke:#10B27E;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .brand{fill:#10B27E}
+  .icon{stroke:#ffffff;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<rect class="bg" x="0" y="0" width="1200" height="380" rx="20"/>
+<text class="head" x="60" y="54">Flux de vente — 4 etapes</text>
+<text class="sub" x="60" y="80">De la page de vente a l assistant en ligne. Paiement unique 1 000 000 GNF.</text>
+<g>
+<!-- Step 1 -->
+<g>
+<rect class="card" x="40" y="110" width="250" height="220" rx="16"/>
+<circle class="num" cx="72" cy="142" r="18"/><text class="numTxt" x="72" y="150" text-anchor="middle">1</text>
+<text class="stepTitle" x="100" y="150">Voir la page</text>
+<text class="stepTxt" x="60" y="185">wapp-assist-vente.</text>
+<text class="stepTxt" x="60" y="207">pages.dev</text>
+<text class="stepTxt" x="60" y="229">Probleme, solution,</text>
+<text class="stepTxt" x="60" y="251">prix, demo WhatsApp.</text>
+<text class="stepTxt" x="60" y="280" fill="#10B27E" font-weight="700">Gratuit, sans compte</text>
+</g>
+<path class="arrow" d="M298 220 h28 m-8 -8 l8 8 l-8 8"/>
+<!-- Step 2 -->
+<g>
+<rect class="card" x="334" y="110" width="250" height="220" rx="16"/>
+<circle class="num" cx="366" cy="142" r="18"/><text class="numTxt" x="366" y="150" text-anchor="middle">2</text>
+<text class="stepTitle" x="394" y="150">Payer</text>
+<text class="stepTxt" x="354" y="185">Orange Money :</text>
+<text class="stepTxt" x="354" y="207">+224 623 99 41 13</text>
+<text class="stepTxt" x="354" y="229">1 000 000 GNF, paiement</text>
+<text class="stepTxt" x="354" y="251">unique, sans abonnement.</text>
+<text class="stepTxt" x="354" y="280" fill="#10B27E" font-weight="700">Bouton Acheter</text>
+</g>
+<path class="arrow" d="M592 220 h28 m-8 -8 l8 8 l-8 8"/>
+<!-- Step 3 -->
+<g>
+<rect class="card" x="628" y="110" width="250" height="220" rx="16"/>
+<circle class="num" cx="660" cy="142" r="18"/><text class="numTxt" x="660" y="150" text-anchor="middle">3</text>
+<text class="stepTitle" x="688" y="150">Recevoir le code</text>
+<text class="stepTxt" x="648" y="185">Validation manuelle,</text>
+<text class="stepTxt" x="648" y="207">envoi du code licence</text>
+<text class="stepTxt" x="648" y="229">via WhatsApp / email.</text>
+<rect x="648" y="248" width="210" height="36" rx="8" fill="#0b0b0b"/><text x="753" y="272" text-anchor="middle" font-family="monospace,Arial" font-size="15" fill="#7CFFB2">WAPP-LIC-2026</text>
+</g>
+<path class="arrow" d="M886 220 h28 m-8 -8 l8 8 l-8 8"/>
+<!-- Step 4 -->
+<g>
+<rect class="card" x="922" y="110" width="238" height="220" rx="16" stroke="#10B27E" stroke-width="2.5"/>
+<circle class="num" cx="954" cy="142" r="18"/><text class="numTxt" x="954" y="150" text-anchor="middle">4</text>
+<text class="stepTitle" x="982" y="150">Installer</text>
+<text class="stepTxt" x="942" y="185">Bouton J ai deja paye,</text>
+<text class="stepTxt" x="942" y="207">saisir le code, acces</text>
+<text class="stepTxt" x="942" y="229">a l installateur web.</text>
+<text class="stepTxt" x="942" y="251">Assistant en ligne 15 min.</text>
+<text class="stepTxt" x="942" y="280" fill="#10B27E" font-weight="700">Zero terminal</text>
+</g>
+</g>
+<text x="60" y="358" font-family="Inter,Arial" font-size="13" fill="#6b6b6b">Contact : +224 623 99 41 13 — https://wapp-assist-vente.pages.dev</text>
+</svg>

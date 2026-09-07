@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+@page { size: A4; margin: 16mm 14mm 16mm 14mm; }
+* { box-sizing: border-box; }
+body { font-family: Inter, Arial, sans-serif; color: #0b0b0b; font-size: 11.5pt; line-height: 1.55; margin: 0; }
+.cover { border-top: 8px solid #10B27E; padding: 18px 0 10px 0; }
+.brand-row { display: flex; align-items: center; gap: 12px; }
+.logo { width: 52px; height: 52px; background: #000; border-radius: 12px; color: #fff; font-family: Poppins, Arial; font-weight: 700; font-size: 28px; display: flex; align-items: center; justify-content: center; }
+.logo span { color: #10B27E; }
+h1 { font-family: Poppins, Arial; font-size: 26pt; margin: 14px 0 4px 0; letter-spacing: -0.5px; }
+h1 span { color: #10B27E; }
+.subtitle { font-size: 12.5pt; color: #333; margin: 0 0 6px 0; }
+.meta { font-size: 9.5pt; color: #6b6b6b; }
+.badge { display: inline-block; background: #000; color: #fff; font-size: 9pt; font-weight: 700; letter-spacing: .06em; padding: 6px 12px; border-radius: 999px; margin-top: 10px; }
+.badge i { color: #10B27E; font-style: normal; }
+h2 { font-family: Poppins, Arial; font-size: 15pt; margin: 26px 0 8px 0; padding-bottom: 6px; border-bottom: 3px solid #10B27E; page-break-after: avoid; }
+h3 { font-size: 12pt; margin: 16px 0 6px 0; color: #0b0b0b; page-break-after: avoid; }
+p { margin: 6px 0; }
+ul, ol { margin: 6px 0 10px 20px; padding: 0; }
+li { margin: 3px 0; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10.5pt; }
+th { background: #0b0b0b; color: #fff; text-align: left; padding: 8px 10px; font-size: 10pt; }
+td { border: 1px solid #e8e8e8; padding: 7px 10px; vertical-align: top; }
+tr:nth-child(even) td { background: #fafafa; }
+a { color: #0d9a6b; text-decoration: none; word-break: break-all; }
+.callout { background: #f0fdf4; border: 1.5px solid #10B27E; border-radius: 10px; padding: 10px 14px; margin: 10px 0; }
+.callout strong { color: #0b0b0b; }
+.flow { background: #000; color: #fff; border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
+.flow ol { margin-left: 18px; }
+.flow li { margin: 4px 0; }
+.flow code { color: #7CFFB2; }
+.footer { margin-top: 24px; border-top: 1px solid #e8e8e8; padding-top: 10px; font-size: 9pt; color: #6b6b6b; }
+.tag { display: inline-block; background: #10B27E; color: #fff; font-size: 8.5pt; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="brand-row"><div class="logo">W<span>.</span></div><div><div style="font-family:Poppins,Arial;font-weight:700;font-size:14pt;">Wapp Assist</div><div class="meta">Kognen IA / Routine — Conakry, Guinee</div></div></div>
+<h1>Wapp Assist — <span>Recapitulatif complet du systeme</span></h1>
+<p class="subtitle">Assistant WhatsApp IA 24h/24 — licence unique, auto-heberge, sans abonnement.</p>
+<p class="meta">Document genere le 7 septembre 2026 — Version production — Contact : +224 623 99 41 13 — <a href="https://wapp-assist-vente.pages.dev">wapp-assist-vente.pages.dev</a></p>
+<span class="badge"><i>●</i> &nbsp;LICENCE UNIQUE 1 000 000 GNF — PAS D'ABONNEMENT</span>
+</div>
+
+<h2>1. Contexte et vision</h2>
+<p><strong>Fondateur :</strong> Moussa Moise Agnessan. <strong>Structure :</strong> Kognen IA, puis agence Routine, basee a Conakry (Guinee).</p>
+<p><strong>Vision :</strong> vendre des services d automatisation IA aux PME guineennes, sans abonnement, sans dependance a des plateformes etrangeres, en gardant 100 % des benefices.</p>
+<p><strong>Produit phare — Wapp Assist :</strong> un assistant WhatsApp IA qui repond aux clients 24h/24 avec leurs produits, leurs prix, leurs horaires. Installe une fois, pas de commission, heberge sur le compte Cloudflare du client.</p>
+<p><strong>Public cible :</strong> restaurants, pharmacies, boutiques, agences immobilieres, commerces recevant des demandes WhatsApp hors horaires d ouverture.</p>
+
+<h2>2. Architecture technique</h2>
+<table>
+<tr><th>Couche</th><th>Technologie</th><th>Hebergement</th></tr>
+<tr><td>Page de vente</td><td>HTML / CSS / JS statique, Inter + Poppins</td><td>Cloudflare Pages — <a href="https://wapp-assist-vente.pages.dev">wapp-assist-vente.pages.dev</a></td></tr>
+<tr><td>Installateur web (frontend)</td><td>HTML / CSS / JS statique, 6 etapes visuelles</td><td>Cloudflare Pages — <a href="https://wapp-installer-frontend.pages.dev">wapp-installer-frontend.pages.dev</a></td></tr>
+<tr><td>Backend installateur</td><td>Node.js + Express + ssh2 + SSE (EventSource)</td><td>Railway — <a href="https://wapp-assist-production.up.railway.app">wapp-assist-production.up.railway.app</a></td></tr>
+<tr><td>Cerveau WhatsApp</td><td>Cloudflare Worker + KV (kognen-whatsapp-brain / wapp-assist-worker)</td><td>Cloudflare Workers</td></tr>
+<tr><td>Base de connaissances</td><td>RAG sur KV Cloudflare (chunk 500 mots, overlap 50, TOP_K 3)</td><td>Cloudflare KV</td></tr>
+<tr><td>Interface de gestion</td><td>React 19 + Vite + Tailwind + Framer Motion</td><td>Cloudflare Pages (admin)</td></tr>
+<tr><td>Auth WhatsApp</td><td>Meta Embedded Signup (direct / 360Dialog / ChatMitra), simulation integree</td><td>API Meta Graph v21.0</td></tr>
+</table>
+<h3>Principes structurants</h3>
+<ul>
+<li><strong>Aucun secret en dur :</strong> secrets via <code>wrangler secret put</code>, variables Railway, ou <code>.env</code> local (ignore par git).</li>
+<li><strong>Isolation multi-client :</strong> cles KV par <code>phone_number_id</code> : <code>kb:&lt;pid&gt;</code>, <code>sources:&lt;pid&gt;</code>, <code>config:&lt;pid&gt;</code>, <code>history:&lt;pid&gt;:&lt;from&gt;</code>.</li>
+<li><strong>White-label :</strong> <code>BRAND_NAME</code>, <code>BRAND_COLOR</code>, <code>BRAND_WHATSAPP_NUMBER</code>, <code>BRAND_LOGO_URL</code>.</li>
+<li><strong>Favicon W :</strong> fond noir, bulle verte #10B27E, W blanc, decline en ico / png / svg.</li>
+</ul>
+
+<h2>3. Fonctionnalites principales</h2>
+<h3>3.1 Cerveau IA (Worker)</h3>
+<ul>
+<li>Reception des messages WhatsApp via webhook Meta, reponse via Gemini (modeles flash-lite / flash / pro avec fallback).</li>
+<li>Carnets <code>/admin/kb</code> : produits, FAQ, horaires. Instruction anti-hallucination : si info absente, repondre « Je verifie avec l equipe ».</li>
+<li>RAG <code>/admin/sources</code> : ingestion PDF / TXT / URL, embeddings <code>text-embedding-004</code> (fallback <code>gemini-embedding-001</code>), seuil 0.3.</li>
+<li>Historique par conversation, proactivite configurable (delai, relance sur « ? »).</li>
+</ul>
+<h3>3.2 Interface de gestion (web-ui)</h3>
+<ul>
+<li><strong>Dashboard :</strong> statut Worker, compteurs produits / FAQ / sources, conseil du jour.</li>
+<li><strong>Meta :</strong> URL Worker, ADMIN_SECRET, Phone Number ID, test de connexion.</li>
+<li><strong>Produits :</strong> CRUD nom / prix / description.</li>
+<li><strong>FAQ et Horaires :</strong> CRUD questions / reponses + horaires.</li>
+<li><strong>Sources :</strong> ajout PDF / TXT / URL, indexation RAG, score de pertinence.</li>
+<li><strong>Assistant :</strong> Apparence (couleur, icone, bulle, fond), Personnalite (ton, registre, style, instructions systeme), Connaissances, Comportement (longueur, proactivite, delai, historique).</li>
+<li><strong>Progression :</strong> gamification (badges, niveaux, barre), onboarding et tutoriel en 6 etapes.</li>
+</ul>
+
+<h2>4. Installateur web — zero terminal</h2>
+<p>Formulaire en 6 etapes visuelles avec barre de progression, logs SSE en direct dans une console moderne (fond sombre, texte vert, scroll), mode simulation sans SSH.</p>
+<ol>
+<li><strong>Serveur SSH :</strong> IP / domaine, port 22, utilisateur, mot de passe ou cle PEM, dossier distant, INSTALLER_SECRET.</li>
+<li><strong>WhatsApp en 1 clic :</strong> bouton « Connecter avec Meta » (popup 600x700, polling <code>/auth/status</code>), fallback manuel token + Phone Number ID.</li>
+<li><strong>Cloud :</strong> Cle Gemini, Cloudflare Account ID + API Token.</li>
+<li><strong>Secrets :</strong> ADMIN_SECRET + VERIFY_TOKEN inventes par le client.</li>
+<li><strong>Marque blanche :</strong> nom, couleur, numero public, URL logo (optionnel).</li>
+<li><strong>Lancement :</strong> bouton Installer, progression 1/6 a 6/6, URL Worker affichee, bouton fallback « Generer commande ».</li>
+</ol>
+<div class="callout"><strong>Securite :</strong> secrets gardes en memoire le temps du job (Map, GC 30 min), masques par <code>***</code> dans les logs, header <code>X-Installer-Secret</code>, timeout 20 min, HTTPS en production.</div>
+<p><strong>Endpoints :</strong> <code>POST /api/install</code>, <code>GET /api/install/:jobId/stream</code> (SSE), <code>GET /api/health</code>, <code>POST /api/verify-license</code>, <code>GET /auth/meta</code>, <code>GET /auth/meta/callback</code>, <code>GET /auth/status</code>.</p>
+
+<h2>5. Page de vente</h2>
+<ul>
+<li>Hero : « Ne perdez plus un client sur WhatsApp », arguments produits / prix / horaires.</li>
+<li>3 cartes : Repond instantanement / Vos connaissances / 100 % a vous.</li>
+<li>Carte prix noire : <strong>1 000 000 GNF, paiement unique</strong>.</li>
+<li>Bouton <strong>Acheter maintenant</strong> (Orange Money manuel, futur lien PayCard).</li>
+<li>Bouton <strong>J ai deja paye</strong> : ouvre un champ « Code de licence », verification via <code>POST /api/verify-license</code> (code <code>WAPP-LIC-2026</code> via variable <code>LICENSE_CODE</code>), redirection vers l installateur si valide.</li>
+<li>Schema pedagogique <code>tuto-vente.svg</code> (remplace la video) + section demo WhatsApp + guide 3 minutes.</li>
+</ul>
+
+<h2>6. Liens finaux (production)</h2>
+<table>
+<tr><th>Service</th><th>URL</th></tr>
+<tr><td>Page de vente</td><td><a href="https://wapp-assist-vente.pages.dev">https://wapp-assist-vente.pages.dev</a></td></tr>
+<tr><td>Installateur web</td><td><a href="https://wapp-installer-frontend.pages.dev">https://wapp-installer-frontend.pages.dev</a></td></tr>
+<tr><td>Backend API</td><td><a href="https://wapp-assist-production.up.railway.app">https://wapp-assist-production.up.railway.app</a></td></tr>
+<tr><td>Sante backend</td><td><a href="https://wapp-assist-production.up.railway.app/api/health">/api/health</a></td></tr>
+<tr><td>Depot GitHub</td><td><a href="https://github.com/kognenia-pixel/wapp-assist">github.com/kognenia-pixel/wapp-assist</a></td></tr>
+</table>
+
+<h2>7. Flux de vente et livraison</h2>
+<div class="flow"><ol>
+<li><strong>Prospection :</strong> message WhatsApp court + lien page de vente.</li>
+<li><strong>Demo :</strong> numero demo WhatsApp + installateur en mode simulation.</li>
+<li><strong>Paiement :</strong> Orange Money au +224 623 99 41 13 (manuel, futur PayCard / lien <code>?pay=</code>).</li>
+<li><strong>Validation :</strong> confirmation de reception, envoi du code de licence + lien installateur par WhatsApp / email.</li>
+<li><strong>Installation :</strong> client clique « J ai deja paye », saisit le code, suit les 6 etapes, branche son numero.</li>
+<li><strong>Mise en ligne :</strong> assistant actif en ~15 minutes. Client autonome (produits, FAQ, sources). Zero support inclus.</li>
+</ol></div>
+
+<h2>8. Technologies et outils</h2>
+<table>
+<tr><th>Outil</th><th>Role</th></tr>
+<tr><td>Cloudflare Workers / Pages / KV</td><td>Cerveau WhatsApp, hebergement statique, stockage RAG</td></tr>
+<tr><td>Railway</td><td>Backend Node.js installateur (plan gratuit)</td></tr>
+<tr><td>React 19 + Vite + Tailwind + Framer Motion</td><td>Interface de gestion</td></tr>
+<tr><td>Node.js + Express + ssh2</td><td>Installateur, execution distante de setup.sh</td></tr>
+<tr><td>Google AI Studio (Gemini)</td><td>LLM + embeddings</td></tr>
+<tr><td>Meta for Developers</td><td>App WhatsApp, tokens, webhook, Embedded Signup</td></tr>
+<tr><td>GitHub</td><td>Versionnement, depot kognenia-pixel/wapp-assist, branche main</td></tr>
+<tr><td>Puppeteer + puppeteer-screen-recorder</td><td>Videos de demonstration (remplacees par schemas SVG)</td></tr>
+<tr><td>Render / GoDaddy</td><td>Tentatives d hebergement abandonnees (au profit de Railway)</td></tr>
+</table>
+
+<h2>9. Historique du projet — phases cles</h2>
+<ol>
+<li><strong>Worker :</strong> nettoyage kb.js / sources.js / config.js / index.js, CORS, /health, Gemini multi-modeles, proactivite.</li>
+<li><strong>Web-UI :</strong> Vite host 0.0.0.0, Tailwind brand, suppression module Avatar, creation module Assistant (4 onglets), tests 9 cas.</li>
+<li><strong>Installateur :</strong> Express + SSE + ssh2, OAuth Meta (direct / 360Dialog), simulation host=demo, frontend statique noir/blanc/vert.</li>
+<li><strong>Vente :</strong> page statique, CTA Orange Money, contact +224 623 99 41 13, favicons W, MESSAGE_VENTE + LIVRAISON + PROSPECTS.</li>
+<li><strong>Infra :</strong> GitHub init + push, Cloudflare Pages (vente + installer), Railway backend, root package.json pour GoDaddy, config.js vers Railway prod.</li>
+<li><strong>Finalisation :</strong> endpoint verify-license, redesign pro sans emoji, videos Puppeteer puis remplacement par schemas SVG, MESSAGE_VENTE_FINAL.md, present PDF.</li>
+</ol>
+
+<h2>10. Etat final et reste a faire</h2>
+<p><span class="tag">FAIT</span> Backend Railway, installateur Pages, page vente Pages, Worker RAG multi-client, interface complete, Meta 1-clic, licence securisee, favicon W, design epure, schemas SVG, code sur GitHub, liens verifies.</p>
+<p><strong>Optionnel :</strong> vrai provider Meta en production (360Dialog / Direct avec CLIENT_ID), lien PayCard Orange Money automatise, domaine personnalise, enrichissement du module Assistant.</p>
+
+<div class="footer">Wapp Assist — Kognen IA / Routine, Conakry. Produit fini vendu en l etat avec guide. Aucune donnee chez l editeur, aucun abonnement. Contact WhatsApp : +224 623 99 41 13. Depot : github.com/kognenia-pixel/wapp-assist.</div>
+</body>
+</html>

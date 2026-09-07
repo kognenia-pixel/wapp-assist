@@ -47,13 +47,12 @@ a{color:inherit;text-decoration:none}
 .hero h1 span{color:var(--brand)}
 .hero .lead{font-size:clamp(15px,2.2vw,18px);color:var(--muted);max-width:680px;line-height:1.7;margin:0}
 
-/* Video Section */
-.video-section{margin:40px 0}
-.video-wrapper{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#0b0b0b;box-shadow:var(--shadow-lg)}
-.video-wrapper video{width:100%;height:100%;object-fit:cover}
-.video-poster{position:absolute;inset:0;background:linear-gradient(135deg,#0b0b0b 0%,#1a1a1a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;text-align:center;padding:24px}
-.video-poster svg{width:64px;height:64px;opacity:.9}
-.video-poster p{margin:0;font-size:14px;opacity:.8}
+/* Tuto Section */
+.tuto-section{margin:40px 0}
+.tuto-figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg)}
+.tuto-figure img{width:100%;height:auto;display:block;background:#fff}
+.tuto-figure figcaption{padding:14px 18px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);background:var(--bg-alt);line-height:1.6}
+.tuto-figure figcaption strong{color:var(--ink)}
 
 /* Features */
 .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0}
@@ -142,17 +141,11 @@ a{color:inherit;text-decoration:none}
     <p class="lead">Vos clients écrivent à toute heure. Wapp Assist répond à votre place, 24h/24, avec <strong>vos produits, vos prix, vos horaires</strong>. Zéro abonnement. Vous installez une fois, c'est à vous.</p>
   </section>
 
-  <section class="video-section" aria-label="Démonstration de la page de vente">
-    <div class="video-wrapper">
-      <video id="demo-video" controls preload="metadata" poster="/video-poster.jpg">
-        <source src="/video-vente.mp4" type="video/mp4" />
-        Votre navigateur ne supporte pas la lecture vidéo.
-      </video>
-      <div class="video-poster" id="video-poster">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>Démonstration de la page de vente — cliquez pour lire</p>
-      </div>
-    </div>
+  <section class="tuto-section" aria-label="Comment acheter Wapp Assist">
+    <figure class="tuto-figure">
+      <img src="/tuto-vente.svg" alt="Schema du flux de vente Wapp Assist en 4 etapes : voir la page, payer 1 000 000 GNF via Orange Money, recevoir le code de licence, installer via l installateur web" loading="lazy" />
+      <figcaption><strong>Comment ca marche, sans video :</strong> 1) Consultez cette page — 2) Payez 1 000 000 GNF via Orange Money au +224 623 99 41 13 — 3) Recevez votre code de licence par WhatsApp — 4) Cliquez sur « J ai deja paye », saisissez le code, installez en 15 minutes.</figcaption>
+    </figure>
   </section>
 
   <section class="features" aria-label="Fonctionnalités principales">
@@ -241,19 +234,6 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <script>
-// Video poster click to play
-const video = document.getElementById('demo-video');
-const poster = document.getElementById('video-poster');
-if (video && poster) {
-  poster.addEventListener('click', () => {
-    video.play().catch(() => {});
-    poster.style.display = 'none';
-  });
-  video.addEventListener('play', () => { poster.style.display = 'none'; });
-  video.addEventListener('pause', () => { if (video.currentTime === 0) poster.style.display = 'flex'; });
-  video.addEventListener('ended', () => { poster.style.display = 'flex'; });
-}
-
 // License verification
 const paidBtn = document.getElementById('paid-btn');
 const licenseSection = document.getElementById('license-section');

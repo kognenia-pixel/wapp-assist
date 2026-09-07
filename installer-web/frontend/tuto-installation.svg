@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="tiTitle tiDesc">
+<title id="tiTitle">Installateur Wapp Assist en 6 etapes</title>
+<desc id="tiDesc">SSH, WhatsApp, Cloud, Secrets, Marque blanche, Lancement avec logs en direct.</desc>
+<style>
+.bg{fill:#ffffff}
+.head{fill:#0b0b0b;font-family:Poppins,Inter,Arial,sans-serif;font-size:26px;font-weight:700}
+.sub{fill:#6b6b6b;font-family:Inter,Arial,sans-serif;font-size:15px}
+.card{fill:#ffffff;stroke:#e8e8e8;stroke-width:2}
+.cardHi{fill:#ffffff;stroke:#10B27E;stroke-width:2.5}
+.num{fill:#10B27E}
+.numTxt{fill:#ffffff;font-family:Inter,Poppins,Arial,sans-serif;font-size:20px;font-weight:700}
+.t{fill:#0b0b0b;font-family:Inter,Poppins,Arial,sans-serif;font-size:17px;font-weight:700}
+.d{fill:#6b6b6b;font-family:Inter,Arial,sans-serif;font-size:13.5px}
+.arrow{stroke:#10B27E;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.foot{fill:#6b6b6b;font-family:Inter,Arial,sans-serif;font-size:13px}
+.tag{fill:#10B27E;font-family:Inter,Arial,sans-serif;font-size:12.5px;font-weight:700}
+</style>
+<rect class="bg" x="0" y="0" width="1200" height="560" rx="20"/>
+<text class="head" x="60" y="52">Installation — 6 etapes, zero terminal</text>
+<text class="sub" x="60" y="78">Remplissez le formulaire, lancez, suivez les logs 1/6 a 6/6. Simulation disponible sans serveur.</text>
+<!-- Row 1 -->
+<g>
+<g><rect class="card" x="40" y="105" width="350" height="190" rx="16"/><circle class="num" cx="70" cy="135" r="17"/><text class="numTxt" x="70" y="142" text-anchor="middle">1</text><text class="t" x="96" y="142">Serveur SSH</text><text class="d" x="60" y="172">IP / domaine, port 22,</text><text class="d" x="60" y="192">utilisateur root, mot de passe</text><text class="d" x="60" y="212">ou cle PEM. Dossier distant</text><text class="d" x="60" y="232">/opt/wapp-assist.</text><text class="tag" x="60" y="264">Ubuntu / Debian + Node 22+</text></g>
+<path class="arrow" d="M398 200 h26 m-8 -8 l8 8 l-8 8"/>
+<g><rect class="cardHi" x="432" y="105" width="350" height="190" rx="16"/><circle class="num" cx="462" cy="135" r="17"/><text class="numTxt" x="462" y="142" text-anchor="middle">2</text><text class="t" x="488" y="142">WhatsApp en 1 clic</text><text class="d" x="452" y="172">Bouton Connecter avec Meta,</text><text class="d" x="452" y="192">choix du numero, validation</text><text class="d" x="452" y="212">SMS. Token recupere seul.</text><text class="d" x="452" y="232">Fallback manuel possible.</text><text class="tag" x="452" y="264">Embedded Signup / simulation</text></g>
+<path class="arrow" d="M790 200 h26 m-8 -8 l8 8 l-8 8"/>
+<g><rect class="card" x="824" y="105" width="336" height="190" rx="16"/><circle class="num" cx="854" cy="135" r="17"/><text class="numTxt" x="854" y="142" text-anchor="middle">3</text><text class="t" x="880" y="142">Cloud Cloudflare</text><text class="d" x="844" y="172">Account ID + API Token</text><text class="d" x="844" y="192">(optionnel mais recommande).</text><text class="d" x="844" y="212">Creation auto du KV et</text><text class="d" x="844" y="232">deploiement du Worker.</text><text class="tag" x="844" y="264">wrangler deploy auto</text></g>
+</g>
+<!-- Row 2 -->
+<g>
+<g><rect class="card" x="40" y="315" width="350" height="190" rx="16"/><circle class="num" cx="70" cy="345" r="17"/><text class="numTxt" x="70" y="352" text-anchor="middle">4</text><text class="t" x="96" y="352">Secrets IA</text><text class="d" x="60" y="382">Cle Gemini (AI Studio),</text><text class="d" x="60" y="402">ADMIN_SECRET + VERIFY_TOKEN</text><text class="d" x="60" y="422">inventes par vous. Jamais</text><text class="d" x="60" y="442">stockes, memoire volatile.</text><text class="tag" x="60" y="474">Masques *** dans les logs</text></g>
+<path class="arrow" d="M398 410 h26 m-8 -8 l8 8 l-8 8"/>
+<g><rect class="card" x="432" y="315" width="350" height="190" rx="16"/><circle class="num" cx="462" cy="345" r="17"/><text class="numTxt" x="462" y="352" text-anchor="middle">5</text><text class="t" x="488" y="352">Marque blanche</text><text class="d" x="452" y="382">Nom boutique, couleur,</text><text class="d" x="452" y="402">numero public, URL logo.</text><text class="d" x="452" y="422">Optionnel, modifiable</text><text class="d" x="452" y="442">dans l interface ensuite.</text><text class="tag" x="452" y="474">BRAND_* via secrets</text></g>
+<path class="arrow" d="M790 410 h26 m-8 -8 l8 8 l-8 8"/>
+<g><rect class="cardHi" x="824" y="315" width="336" height="190" rx="16"/><circle class="num" cx="854" cy="345" r="17"/><text class="numTxt" x="854" y="352" text-anchor="middle">6</text><text class="t" x="880" y="352">Lancement</text><text class="d" x="844" y="382">Bouton Installer, logs</text><text class="d" x="844" y="402">en direct SSE, barre 1/6-6/6.</text><text class="d" x="844" y="422">URL Worker affichee.</text><text class="d" x="844" y="442">Mode simulation sans SSH.</text><text class="tag" x="844" y="474">Succes = assistant en ligne</text></g>
+</g>
+<text class="foot" x="60" y="534">Backend : https://wapp-assist-production.up.railway.app — Frontend : https://wapp-installer-frontend.pages.dev</text>
+</svg>
