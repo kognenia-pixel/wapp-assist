@@ -1,112 +1,317 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Wapp Assist — Installateur web</title>
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/favicon.png" />
-  <link rel="stylesheet" href="./style.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wapp Assist — Installateur web</title>
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <div class="header">
-      <div>
-        <div style="font-family:Poppins;font-weight:700;font-size:22px;letter-spacing:-.02em">Wapp <span style="color:var(--brand)">Assist</span> <span style="font-weight:600;color:#555">— Installateur</span></div>
-        <div style="font-size:12px;color:#555;margin-top:4px">Déployez votre Worker Cloudflare en 6 étapes, sans terminal. Vos clés restent chez vous — jamais stockées.</div>
-      </div>
-      <span class="badge"><i></i> 1 000 000 GNF · licence unique</span>
+<div class="page">
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">Wapp <span>Assist</span></div>
+      <p class="subtitle">Déployez votre Worker Cloudflare en 6 étapes, sans terminal. Vos clés restent chez vous.</p>
     </div>
+    <span class="badge">1 000 000 GNF · licence unique</span>
+  </header>
 
-    <div id="form-card" class="card">
-      <h2 class="font-display" style="margin:0;font-size:18px">1. Connexion à votre serveur</h2>
-      <p style="margin:6px 0 14px;font-size:12px;color:#555">Serveur vierge Ubuntu/Debian avec Node 22+. L’installateur se connecte en SSH et exécute <code>setup.sh</code>.</p>
-
-      <div class="grid2">
-        <label>Adresse IP ou domaine *<input id="host" placeholder="192.168.1.100 ou mon-serveur.com" /></label>
-        <label>Port SSH <input id="port" type="number" value="22" /></label>
-        <label>Utilisateur SSH *<input id="username" value="root" /></label>
-        <label>Dossier distant <input id="remotePath" value="/opt/wapp-assist" /><hint>Où décompresser wapp-assist.zip</hint></label>
-      </div>
-      <div class="grid2" style="margin-top:14px">
-        <label>Mot de passe (si pas de clé)<input id="password" type="password" placeholder="••••••••" /></label>
-        <label>Clé privée SSH (PEM, si pas de mot de passe)<textarea id="privateKey" placeholder="-----BEGIN OPENSSH PRIVATE KEY-----"></textarea></label>
-      </div>
-      <label style="margin-top:14px">Secret installateur (si backend protégé)<input id="installerSecret" type="password" placeholder="INSTALLER_SECRET du .env" /><hint>Header X-Installer-Secret. Laissez vide en dev.</hint></label>
-
-      <hr class="sep" />
-      <h2 class="font-display" style="margin:0;font-size:18px">2. Clés Cloud & WhatsApp</h2>
-
-      <!-- BLOC OAUTH META — remplace les champs token/phone -->
-      <div class="card" style="margin-top:12px;border:2px solid var(--brand);background:#f0fdf4">
-        <h3 style="margin:0;font-size:14px">📱 WhatsApp Business — connexion en 1 clic</h3>
-        <p style="margin:6px 0 10px;font-size:12px;color:#555">Plus besoin d’ouvrir Meta for Developers. Cliquez, connectez votre compte Meta, choisissez votre numéro, validez le SMS — l’installateur récupère tout seul.</p>
-        <div id="meta-status" class="notice" style="background:#fff">🔌 Non connecté — cliquez sur “Connecter avec Meta”</div>
-        <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
-          <button id="btn-meta" type="button" class="btn btn-brand">Connecter avec Meta</button>
-          <button id="btn-meta-reset" type="button" class="btn btn-ghost" style="display:none">Déconnecter</button>
-          <span id="meta-hint" style="font-size:11px;color:#555;align-self:center">Vous serez redirigé vers Meta / 360Dialog, puis reviendrez ici.</span>
+  <main class="main">
+    <!-- Video Demo Section -->
+    <section class="video-section" aria-label="Démonstration de l'installateur">
+      <div class="video-wrapper">
+        <video id="demo-video" controls preload="metadata" poster="/video-poster.jpg">
+          <source src="/video-installateur.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+        <div class="video-poster" id="video-poster">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <p>Démonstration de l'installateur — cliquez pour lire</p>
         </div>
-        <div id="meta-details" style="display:none;margin-top:10px;font-size:12px;color:#111;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px"></div>
-        <details style="margin-top:10px">
-          <summary style="font-size:12px;color:#555;cursor:pointer">Mode manuel (avancé) — coller token & ID</summary>
-          <div class="grid2" style="margin-top:10px">
-            <label>Token WhatsApp Meta <input id="whatsappToken" type="password" placeholder="EAA..." /><hint>Meta Developer → API Setup → Generate token</hint></label>
-            <label>Phone Number ID <input id="phoneNumberId" placeholder="11820169..." /></label>
+      </div>
+    </section>
+
+    <!-- Progress Steps -->
+    <nav class="progress-nav" aria-label="Étapes d'installation">
+      <ol class="progress-steps">
+        <li class="step-item active" data-step="1"><span class="step-num">1</span><span class="step-label">Serveur</span></li>
+        <li class="step-item" data-step="2"><span class="step-num">2</span><span class="step-label">WhatsApp</span></li>
+        <li class="step-item" data-step="3"><span class="step-num">3</span><span class="step-label">Cloud</span></li>
+        <li class="step-item" data-step="4"><span class="step-num">4</span><span class="step-label">Marque</span></li>
+        <li class="step-item" data-step="5"><span class="step-num">5</span><span class="step-label">Lancement</span></li>
+        <li class="step-item" data-step="6"><span class="step-num">6</span><span class="step-label">Terminé</span></li>
+      </ol>
+    </nav>
+
+    <!-- Form Card -->
+    <section id="form-section" class="form-section" aria-labelledby="form-title">
+      <div class="card">
+        <header class="card-header">
+          <h2 id="form-title" class="card-title">Configuration de l'installation</h2>
+          <p class="card-desc">Remplissez les informations ci-dessous. Les champs marqués <span class="required" aria-hidden="true">*</span> sont obligatoires.</p>
+        </header>
+
+        <!-- Step 1: Server -->
+        <fieldset class="form-step" data-step="1" aria-labelledby="step1-title">
+          <legend id="step1-title" class="step-title">
+            <span class="step-indicator" aria-hidden="true">1</span>
+            Connexion au serveur
+          </legend>
+          <p class="step-hint">Serveur vierge Ubuntu/Debian avec Node 22+. L'installateur se connecte en SSH et exécute <code>setup.sh</code>.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="host">Adresse IP ou domaine <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="host" placeholder="192.168.1.100 ou mon-serveur.com" autocomplete="off" required />
+            </div>
+            <div class="field">
+              <label for="port">Port SSH</label>
+              <input type="number" id="port" value="22" min="1" max="65535" />
+            </div>
           </div>
-        </details>
-      </div>
 
-      <div class="grid2" style="margin-top:12px">
-        <label>Clé Gemini *<input id="geminiKey" type="password" placeholder="AIza..." /><hint>https://aistudio.google.com/apikey</hint></label>
-        <label>Cloudflare Account ID <input id="cfAccountId" placeholder="optionnel mais recommandé" /></label>
-        <label>Cloudflare API Token <input id="cfApiToken" type="password" placeholder="CLOUDFLARE_API_TOKEN" /></label>
-        <label>ADMIN_SECRET *<input id="adminSecret" type="password" placeholder="Phrase longue que vous inventez" /></label>
-        <label>VERIFY_TOKEN *<input id="verifyToken" type="password" placeholder="ex: mon_verif_2026" /></label>
-      </div>
-      <p style="margin-top:8px;font-size:11px;color:#777">Besoin d’un compte Meta Business (gratuit) + un numéro de téléphone capable de recevoir un SMS. Le fournisseur (360Dialog/Meta) ne prend que les autorisations WhatsApp, vous gardez la propriété du compte.</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="username">Utilisateur SSH <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="username" value="root" autocomplete="off" required />
+            </div>
+            <div class="field">
+              <label for="remotePath">Dossier distant</label>
+              <input type="text" id="remotePath" value="/opt/wapp-assist" />
+              <span class="hint">Où décompresser wapp-assist.zip</span>
+            </div>
+          </div>
 
-      <hr class="sep" />
-      <h2 class="font-display" style="margin:0;font-size:18px">3. Marque blanche (optionnel)</h2>
-      <div class="grid2" style="margin-top:12px">
-        <label>Nom boutique<input id="brandName" placeholder="Ma Boutique" /></label>
-        <label>Couleur<input id="brandColor" type="color" value="#10B27E" /></label>
-        <label>Numéro public<input id="brandWhatsapp" placeholder="+224 6XX XX XX XX" /></label>
-        <label>URL logo<input id="brandLogoUrl" placeholder="https://..." /></label>
-      </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="password">Mot de passe (si pas de clé)</label>
+              <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+            </div>
+            <div class="field">
+              <label for="privateKey">Clé privée SSH (PEM)</label>
+              <textarea id="privateKey" placeholder="-----BEGIN OPENSSH PRIVATE KEY-----&#10;&#10;-----END OPENSSH PRIVATE KEY-----" rows="3"></textarea>
+              <span class="hint">Laissez vide si vous utilisez un mot de passe</span>
+            </div>
+          </div>
 
-      <div class="notice" style="margin-top:14px">
-        <strong>Sécurité :</strong> aucune clé n’est stockée. Le backend les garde en mémoire le temps de l’installation puis les jette. Utilisez HTTPS en production.
-        <label style="margin-top:10px;display:flex;gap:8px;align-items:center;font-weight:600"><input id="simulate" type="checkbox" /> Mode simulation (sans SSH, démo temps réel)</label>
-      </div>
+          <div class="field">
+            <label for="installerSecret">Secret installateur (si backend protégé)</label>
+            <input type="password" id="installerSecret" placeholder="INSTALLER_SECRET du .env" autocomplete="current-password" />
+            <span class="hint">Header X-Installer-Secret. Laissez vide en développement.</span>
+          </div>
+        </fieldset>
 
-      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-        <button id="btn-install" class="btn btn-brand">Installer Wapp Assist</button>
-        <button id="btn-command" class="btn btn-ghost" type="button">Générer commande fallback</button>
-        <span id="form-error" style="font-size:12px;color:#c00;align-self:center"></span>
-      </div>
-      <pre id="cmd-out" style="display:none;margin-top:12px;background:#0b0b0b;color:#d6ffe9;border-radius:12px;padding:12px;font-size:11px;white-space:pre-wrap"></pre>
-    </div>
+        <!-- Step 2: WhatsApp -->
+        <fieldset class="form-step" data-step="2" aria-labelledby="step2-title" hidden>
+          <legend id="step2-title" class="step-title">
+            <span class="step-indicator" aria-hidden="true">2</span>
+            WhatsApp Business
+          </legend>
 
-    <div id="run-card" class="card" style="display:none;margin-top:16px">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-        <h2 class="font-display" style="margin:0;font-size:18px">Installation en cours…</h2>
-        <span id="status-badge" class="badge">⏳ running</span>
-      </div>
-      <div style="margin-top:10px" class="progress"><div id="bar"></div></div>
-      <div id="step" style="margin-top:8px;font-size:12px;color:#555">Étape 0/6</div>
-      <div id="worker-url" style="margin-top:8px;font-size:12px"></div>
-      <div id="logs" class="logs" aria-live="polite"></div>
-      <div style="display:flex;gap:10px;margin-top:12px">
-        <button id="btn-back" class="btn btn-ghost" type="button">Retour au formulaire</button>
-        <button id="btn-copy-logs" class="btn btn-brand" type="button">Copier les logs</button>
-      </div>
-    </div>
+          <div class="meta-card" id="meta-card">
+            <div class="meta-header">
+              <div class="meta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div>
+                <h3>Connexion en 1 clic</h3>
+                <p>Plus besoin d'ouvrir Meta for Developers. Cliquez, connectez votre compte Meta, choisissez votre numéro, validez le SMS — l'installateur récupère tout automatiquement.</p>
+              </div>
+            </div>
 
-    <p style="margin-top:16px;font-size:11px;color:#777">Astuce : si SSH échoue (port 22 fermé), utilisez “Générer commande fallback” et collez-la en SSH manuel. Le ZIP contient aussi <code>setup.sh</code> en local.</p>
-  </div>
-  <script src="./config.js"></script>
-  <script src="./app.js"></script>
+            <div id="meta-status" class="meta-status disconnected" role="status" aria-live="polite">
+              <span class="status-indicator" aria-hidden="true"></span>
+              <span>Non connecté — cliquez sur "Connecter avec Meta"</span>
+            </div>
+
+            <div class="meta-actions">
+              <button id="btn-meta" type="button" class="btn btn-primary">Connecter avec Meta</button>
+              <button id="btn-meta-reset" type="button" class="btn btn-secondary" hidden>Déconnecter</button>
+            </div>
+            <p id="meta-hint" class="meta-hint">Vous serez redirigé vers Meta / 360Dialog, puis reviendrez ici.</p>
+
+            <div id="meta-details" class="meta-details" hidden></div>
+
+            <details class="manual-fields">
+              <summary>Mode manuel (avancé) — coller token & ID</summary>
+              <div class="field-row" style="margin-top:12px">
+                <div class="field">
+                  <label for="whatsappToken">Token WhatsApp Meta</label>
+                  <input type="password" id="whatsappToken" placeholder="EAA..." autocomplete="off" />
+                  <span class="hint">Meta Developer → API Setup → Generate token</span>
+                </div>
+                <div class="field">
+                  <label for="phoneNumberId">Phone Number ID</label>
+                  <input type="text" id="phoneNumberId" placeholder="11820169..." autocomplete="off" />
+                </div>
+              </div>
+            </details>
+          </div>
+        </fieldset>
+
+        <!-- Step 3: Cloud & Secrets -->
+        <fieldset class="form-step" data-step="3" aria-labelledby="step3-title" hidden>
+          <legend id="step3-title" class="step-title">
+            <span class="step-indicator" aria-hidden="true">3</span>
+            Clés Cloud & Secrets
+          </legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="geminiKey">Clé Gemini <span class="required" aria-hidden="true">*</span></label>
+              <input type="password" id="geminiKey" placeholder="AIza..." autocomplete="off" required />
+              <span class="hint"><a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">aistudio.google.com/apikey</a></span>
+            </div>
+            <div class="field">
+              <label for="cfAccountId">Cloudflare Account ID</label>
+              <input type="text" id="cfAccountId" placeholder="optionnel mais recommandé" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="cfApiToken">Cloudflare API Token</label>
+              <input type="password" id="cfApiToken" placeholder="CLOUDFLARE_API_TOKEN" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="adminSecret">ADMIN_SECRET <span class="required" aria-hidden="true">*</span></label>
+              <input type="password" id="adminSecret" placeholder="Phrase longue que vous inventez" autocomplete="off" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="verifyToken">VERIFY_TOKEN <span class="required" aria-hidden="true">*</span></label>
+              <input type="password" id="verifyToken" placeholder="ex: mon_verif_2026" autocomplete="off" required />
+            </div>
+          </div>
+
+          <p class="step-hint">Besoin d'un compte Meta Business (gratuit) + un numéro capable de recevoir un SMS. Le fournisseur ne prend que les autorisations WhatsApp, vous gardez la propriété du compte.</p>
+        </fieldset>
+
+        <!-- Step 4: White Label -->
+        <fieldset class="form-step" data-step="4" aria-labelledby="step4-title" hidden>
+          <legend id="step4-title" class="step-title">
+            <span class="step-indicator" aria-hidden="true">4</span>
+            Marque blanche (optionnel)
+          </legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="brandName">Nom de la boutique</label>
+              <input type="text" id="brandName" placeholder="Ma Boutique" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="brandColor">Couleur principale</label>
+              <input type="color" id="brandColor" value="#10B27E" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="brandWhatsapp">Numéro public WhatsApp</label>
+              <input type="text" id="brandWhatsapp" placeholder="+224 6XX XX XX XX" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="brandLogoUrl">URL du logo</label>
+              <input type="url" id="brandLogoUrl" placeholder="https://..." autocomplete="off" />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 5: Launch -->
+        <fieldset class="form-step" data-step="5" aria-labelledby="step5-title" hidden>
+          <legend id="step5-title" class="step-title">
+            <span class="step-indicator" aria-hidden="true">5</span>
+            Lancement
+          </legend>
+
+          <div class="launch-options">
+            <label class="option-card">
+              <input type="checkbox" id="simulate" />
+              <div class="option-content">
+                <span class="option-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
+                </span>
+                <div>
+                  <strong>Mode simulation</strong>
+                  <span>Testez l'installation sans serveur réel (démo temps réel)</span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <p class="security-notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <strong>Sécurité :</strong> aucune clé n'est stockée. Le backend les garde en mémoire le temps de l'installation puis les jette. Utilisez HTTPS en production.
+          </p>
+
+          <div class="form-actions">
+            <button id="btn-install" type="button" class="btn btn-primary btn-lg">Installer Wapp Assist</button>
+            <button id="btn-command" type="button" class="btn btn-secondary btn-lg">Générer commande fallback</button>
+          </div>
+          <pre id="cmd-out" class="cmd-output" hidden></pre>
+        </fieldset>
+
+        <!-- Step 6: Complete -->
+        <fieldset class="form-step" data-step="6" aria-labelledby="step6-title" hidden>
+          <legend id="step6-title" class="step-title">
+            <span class="step-indicator" aria-hidden="true">6</span>
+            Installation terminée
+          </legend>
+          <div class="completion-message">
+            <div class="completion-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <h3>Installation réussie</h3>
+            <p>Votre Worker Wapp Assist est déployé et opérationnel.</p>
+            <div id="worker-url-display" class="worker-url" hidden></div>
+          </div>
+          <div class="form-actions">
+            <button id="btn-back" type="button" class="btn btn-secondary">Retour au formulaire</button>
+            <button id="btn-copy-logs" type="button" class="btn btn-primary">Copier les logs</button>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- Run Card (Installation in progress) -->
+    <section id="run-section" class="run-section" hidden aria-labelledby="run-title" aria-live="polite">
+      <div class="card">
+        <header class="card-header">
+          <h2 id="run-title" class="card-title">Installation en cours</h2>
+          <span id="status-badge" class="status-badge running">En cours</span>
+        </header>
+
+        <div class="run-progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="6">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+          <div id="step-display" class="step-display">Étape 0/6</div>
+        </div>
+
+        <div id="worker-url" class="worker-url" hidden></div>
+
+        <div id="logs" class="logs" role="log" aria-live="polite" aria-label="Logs d'installation"></div>
+
+        <div class="form-actions">
+          <button id="btn-back-run" type="button" class="btn btn-secondary">Retour au formulaire</button>
+          <button id="btn-copy-logs-run" type="button" class="btn btn-primary">Copier les logs</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-hint">Astuce : si SSH échoue (port 22 fermé), utilisez "Générer commande fallback" et collez-la en SSH manuel. Le ZIP contient aussi <code>setup.sh</code> en local.</p>
+  </main>
+</div>
+
+<script src="./config.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>

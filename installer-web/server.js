@@ -11,6 +11,7 @@ const PORT = Number(process.env.PORT || 3001);
 const INSTALLER_SECRET = (process.env.INSTALLER_SECRET || "").trim();
 const SETUP_SH_URL = (process.env.SETUP_SH_URL || "https://raw.githubusercontent.com/ton-compte/wapp-assist/main/setup.sh").trim();
 const FRONTEND_ORIGIN = (process.env.FRONTEND_ORIGIN || "*").trim();
+const LICENSE_CODE = (process.env.LICENSE_CODE || "WAPP-LIC-2026").trim();
 
 // Meta / fournisseur de solution (360Dialog, ChatMitra, Ominiflow, direct)
 const META_PROVIDER = (process.env.META_PROVIDER || "direct").trim().toLowerCase(); // direct | 360dialog | chatmitra | ominiflow
@@ -448,6 +449,16 @@ app.get("/auth/meta/url", (req, res) => {
   const authUrl = buildMetaAuthUrl(state);
   res.cookie("wapp_meta_state", state, { httpOnly: false, sameSite: "Lax", path: "/", maxAge: 30 * 60 * 1000 });
   res.json({ ok: true, authUrl, state });
+});
+
+// ----------------- LICENSE VERIFICATION -----------------
+app.post("/api/verify-license", (req, res) => {
+  const code = String(req.body?.code || "").trim();
+  if (!code) return res.status(400).json({ valid: false, error: "Code de licence requis" });
+  if (code === LICENSE_CODE) {
+    return res.json({ valid: true, redirectUrl: "https://wapp-installer-frontend.pages.dev" });
+  }
+  return res.status(401).json({ valid: false, error: "Code invalide. Veuillez contacter le support." });
 });
 
 // ----------------- INSTALL -----------------

@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#000"/><circle cx="32" cy="32" r="22" fill="#10B27E"/><rect x="20" y="24" width="24" height="16" rx="4" fill="#fff"/><circle cx="26" cy="32" r="3" fill="#000"/><circle cx="38" cy="32" r="3" fill="#000"/><path d="M26 36 Q32 40 38 36" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="32" y1="12" x2="32" y2="24" stroke="#fff" stroke-width="2"/><circle cx="32" cy="10" r="3" fill="#fff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Fond : noir profond du thème -->
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#000000"/>
+  <!-- Bulle de discussion émeraude (#10B27E = accent du thème) -->
+  <rect x="11" y="12" width="42" height="30" rx="9" fill="#10B27E"/>
+  <path d="M22 42 L22 51 L32 42 Z" fill="#10B27E"/>
+  <!-- W géométrique blanc, traits épais pour rester net en 16px -->
+  <path d="M19 20 L24 34 L29 24 L34 34 L39 20"
+        fill="none" stroke="#FFFFFF" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
